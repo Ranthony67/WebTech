@@ -5,7 +5,7 @@ var app = express();
 app.set('view engine', 'pug');
 
 app.get('/', function(req, res) {
-  res.render('views/index', { message: 'test', title: 'test' });
+  res.render('index', { message: 'test', title: 'test' });
 });
 
 app.listen(3000, function() {
