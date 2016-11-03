@@ -11,11 +11,6 @@ var db = mongoose.connection;
 // Set PUG as template engine
 app.set('view engine', 'pug');
 
-// Setup routes
-app.get('/', function(req, res) {
-	res.render('index', { message: 'test', title: 'test' });
-});
-
 // Database schemas
 var exerciseSchema = new mongoose.Schema({
 	name: String,
@@ -31,6 +26,15 @@ db.on('open', function() {
 });
 
 mongoose.connect(mongoDbPath);
+
+// Setup routes
+app.get('/', function(req, res) {
+	res.render('index', { message: 'test', title: 'test' });
+});
+
+app.get('/new', function(req, res) {
+	res.render('new');
+});
 
 // Initialise app server
 app.listen(3000, function() {
