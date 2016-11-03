@@ -32,8 +32,8 @@ app.get('/', function(req, res) {
 	res.render('index', { message: 'test', title: 'test' });
 });
 
-app.get('/new', function(req, res) {
-	res.render('new');
+app.get('/traning_program/new', function(req, res) {
+	res.render('traning_program/new');
 });
 
 // Initialise app server
