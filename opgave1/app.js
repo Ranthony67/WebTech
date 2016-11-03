@@ -21,7 +21,7 @@ var exerciseSchema = new mongoose.Schema({
 	name: String,
 	description: String,
 	sets: Number,
-	repetition: Number
+	repetition: String
 });
 var Exercise = mongoose.model('Exercise', exerciseSchema);
 
@@ -36,3 +36,4 @@ mongoose.connect(mongoDbPath);
 app.listen(3000, function() {
 	console.log("App is now running on port 3000");
 });
+
