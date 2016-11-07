@@ -20,5 +20,14 @@ router.post('/new', (req, res) => {
   });
 });
 
+router.post('/:exerciseId/delete', (req, res) => {
+  const exercise_id = req.params.exerciseId;
+  const program_id = req.params.id;
+  
+  Exercise
+    .find({_id: exercise_id}).remove().exec();
+
+  res.redirect('/program/' + program_id);
+});
 
 module.exports = router;
