@@ -19,7 +19,7 @@ app.set('view engine', 'pug');
 db.on('error', console.error);
 db.on('open', function () {
 });
-mongoose.connect(process.env.MONGODB_URL);
+mongoose.connect(process.env.MONGODB_URI);
 
 var Program = require('./models/program');
 
