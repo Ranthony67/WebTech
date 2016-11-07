@@ -15,7 +15,7 @@ router.get('/:id', function (req, res) {
   const program_id = req.params.id;
 
   Program
-    .findOne({_id: program_id}, (error, program)=> {
+    .findOne({_id: program_id}, (error, program) => {
       Exercise.find({program_id: program_id}, (err, exercises) => {
         console.log("[Program] Found " + exercises.length + " exercises");
         res.render('program/show', {program, exercises});
@@ -24,15 +24,15 @@ router.get('/:id', function (req, res) {
 });
 
 
-router.post('/:id/delete' (req, res) => {
+router.post('/:id/delete', (req, res) => {
   const program_id = req.params.id;
 
   Program
-    .findOne({_id: program_id}, (error,program)=> {
+    .findOne({_id: program_id}, (error, program)=> {
       Exercise
         .find({program_id: program_id}).remove().exec();
     }).remove().exec();
-    res.redirect('/index/');
-})
+  res.redirect('/index/');
+});
 
 module.exports = router;
