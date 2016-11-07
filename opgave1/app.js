@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser')
@@ -8,7 +10,6 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 
 // MongoDB setup with mongoose
-var mongoDbPath = 'mongodb://localhost/opgave1';
 var db = mongoose.connection;
 
 // Set PUG as template engine
@@ -18,7 +19,7 @@ app.set('view engine', 'pug');
 db.on('error', console.error);
 db.on('open', function () {
 });
-mongoose.connect(mongoDbPath);
+mongoose.connect(process.env.MONGODB_URL);
 
 var Program = require('./models/program');
 
