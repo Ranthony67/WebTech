@@ -35,12 +35,12 @@ router.get('/:id/markAsDone', (req, res) => {
 
 
 router.post('/:id/delete', (req, res) => {
-  const program_id = req.params.id;
+  const programId = req.params.id;
 
   Program
-    .findOne({_id: program_id}, (error, program)=> {
+    .findOne({_id: programId}, (error, program)=> {
       Exercise
-        .find({program_id: program_id}).remove().exec();
+        .find({program_id: programId}).remove().exec();
     }).remove().exec();
   res.redirect('/');
 });

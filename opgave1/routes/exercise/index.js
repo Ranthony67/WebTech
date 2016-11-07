@@ -21,23 +21,23 @@ router.post('/new', (req, res) => {
 });
 
 router.post('/:exerciseId/delete', (req, res) => {
-  const exercise_id = req.params.exerciseId;
-  const program_id = req.params.id;
+  const exerciseId = req.params.exerciseId;
+  const programId = req.params.id;
 
   Exercise
-    .find({_id: exercise_id}).remove().exec();
+    .find({_id: exerciseId}).remove().exec();
 
-  res.redirect('/program/' + program_id);
+  res.redirect('/program/' + programId);
 });
 
 router.get('/:exerciseId/markAsDone', (req, res) => {
-  const exercise_id = req.params.exerciseId;
-  const program_id = req.params.id;
+  const exerciseId = req.params.exerciseId;
+  const programId = req.params.id;
 
-  Exercise.findOne({_id: exercise_id}, (error, exercise) => {
+  Exercise.findOne({_id: exerciseId}, (error, exercise) => {
     exercise.done = true;
     exercise.save(() => {
-      res.redirect('/program/' + program_id);
+      res.redirect('/program/' + programId);
     });
   });
 });
