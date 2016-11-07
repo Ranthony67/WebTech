@@ -24,6 +24,7 @@ block append content
 
   .row
     .col-xs-6
+      h4 Tilføj øvelse
       form(action=('/program/' + program._id + '/exercise/new') method='post')
         .form-group
           input.form-control(type='text' name='name' placeholder='Øvelse')

@@ -17,7 +17,6 @@ router.get('/:id', function (req, res) {
   Program
     .findOne({_id: program_id}, (error, program) => {
       Exercise.find({program_id: program_id}, (err, exercises) => {
-        console.log("[Program] Found " + exercises.length + " exercises");
         res.render('program/show', {program, exercises});
       });
     });
@@ -32,7 +31,7 @@ router.post('/:id/delete', (req, res) => {
       Exercise
         .find({program_id: program_id}).remove().exec();
     }).remove().exec();
-  res.redirect('/index/');
+  res.redirect('/');
 });
 
 module.exports = router;

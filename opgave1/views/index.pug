@@ -11,11 +11,13 @@ block append content
       tbody
         each program in programs
           tr
-            td= program._id
             td
-              a(href='program/' + program._id) Vis program
+              a(href='program/' + program._id)= program._id
             td
-              a(href='program/' + program._id + '/delete') Slet program
+              form(action='program/' + program._id + '/delete' method='post')
+                button.btn.btn-danger(type='submit')
+                  i.fa.fa-trash
+                  = ' Slet program'
 
     form(action='/program' method='post')
-    input.btn.btn-default(type='submit' value='Create a new traning program')
+      input.btn.btn-default(type='submit' value='Create a new traning program')
