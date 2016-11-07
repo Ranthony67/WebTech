@@ -1,6 +1,6 @@
 var Program = require('../../models/program');
 var Exercise = require('../../models/exercise');
-var router = require('express').Router({ mergeParams: true });
+var router = require('express').Router({mergeParams: true});
 
 router.post('/new', (req, res) => {
   const programId = req.params.id;
@@ -23,11 +23,23 @@ router.post('/new', (req, res) => {
 router.post('/:exerciseId/delete', (req, res) => {
   const exercise_id = req.params.exerciseId;
   const program_id = req.params.id;
-  
+
   Exercise
     .find({_id: exercise_id}).remove().exec();
 
   res.redirect('/program/' + program_id);
+});
+
+router.get('/:exerciseId/markAsDone', (req, res) => {
+  const exercise_id = req.params.exerciseId;
+  const program_id = req.params.id;
+
+  Exercise.findOne({_id: exercise_id}, (error, exercise) => {
+    exercise.done = true;
+    exercise.save(() => {
+      res.redirect('/program/' + program_id);
+    });
+  });
 });
 
 module.exports = router;

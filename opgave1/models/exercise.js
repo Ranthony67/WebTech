@@ -5,7 +5,8 @@ var exerciseSchema = new mongoose.Schema({
   name: String,
   description: String,
   sets: String,
-  repetition: String
+  repetition: String,
+  done: Boolean
 });
 var Exercise = mongoose.model('Exercise', exerciseSchema);
 

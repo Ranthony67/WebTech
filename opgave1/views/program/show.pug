@@ -10,6 +10,8 @@ block append content
             th Beskrivelse
             th Set
             th Gentagelser/tid
+            th Gennemført?
+            th Slet
         tbody
           if exercises.length == 0
             tr
@@ -21,6 +23,18 @@ block append content
               td= exercise.description
               td= exercise.sets
               td= exercise.repetition
+              td
+                if exercise.done
+                  i.fa.fa-check
+                else
+                  i.fa.fa-times
+                  = ' - '
+                  a.btn.btn-default(href='/program/' + program._id + '/exercise/' + exercise._id + '/markAsDone') Gennemfør
+              td
+                form(action='/program/' + program._id + '/exercise/' + exercise._id + '/delete' method='post')
+                  button.btn.btn-danger(type='submit')
+                    i.fa.fa-trash
+                    = ' Slet'
 
   .row
     .col-xs-6
