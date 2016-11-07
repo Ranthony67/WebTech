@@ -1,9 +1,11 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser')
 mongoose.Promise = global.Promise;
 
 // Express setup
 var app = express();
+app.use(bodyParser.urlencoded({extended: true}));
 
 // MongoDB setup with mongoose
 var mongoDbPath = 'mongodb://localhost/opgave1';
@@ -28,7 +30,7 @@ app.get('/', function (req, res) {
 
   Program
     .find((error, items)=> {
-      res.render('index', { programs: items });
+      res.render('index', {programs: items});
     });
 });
 

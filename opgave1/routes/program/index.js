@@ -2,14 +2,11 @@ var Program = require('../../models/program');
 var Exercise = require('../../models/exercise');
 var router = require('express').Router();
 
+// Makes nested routes possible
+router.use('/:id/exercise', require('../exercise'));
+
 router.post('/', function (req, res) {
   new Program().save((err, item) => {
-
-    var exercise = new Exercise();
-    exercise.program_id = item._id;
-
-    exercise.save();
-
     res.redirect('/program/' + item._id);
   });
 });

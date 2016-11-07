@@ -4,7 +4,7 @@ var exerciseSchema = new mongoose.Schema({
   program_id: String,
   name: String,
   description: String,
-  sets: Number,
+  sets: String,
   repetition: String
 });
 var Exercise = mongoose.model('Exercise', exerciseSchema);
