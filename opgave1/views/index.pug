@@ -5,7 +5,8 @@ block append content
     table.table
       thead
         tr
-          th Test
+          th Program id
+          th Gennemført?
           th
           th
       tbody
@@ -13,6 +14,13 @@ block append content
           tr
             td
               a(href='program/' + program._id)= program._id
+            td
+              if program.done
+                i.fa.fa-check
+              else
+                i.fa.fa-times
+                = ' - '
+                a.btn.btn-default(href='/program/' + program._id + '/markAsDone') Gennemfør
             td
               form(action='program/' + program._id + '/delete' method='post')
                 button.btn.btn-danger(type='submit')

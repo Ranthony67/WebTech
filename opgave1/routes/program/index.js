@@ -22,6 +22,17 @@ router.get('/:id', function (req, res) {
     });
 });
 
+router.get('/:id/markAsDone', (req, res) => {
+  const programId = req.params.id;
+
+  Program.findOne({_id: programId}, (error, program) => {
+    program.done = true;
+    program.save(() => {
+      res.redirect('/');
+    });
+  });
+});
+
 
 router.post('/:id/delete', (req, res) => {
   const program_id = req.params.id;
