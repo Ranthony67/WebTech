@@ -1,5 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
 // Express setup
 var app = express();
@@ -33,16 +34,21 @@ mongoose.connect(mongoDbPath);
 
 // Setup routes
 app.get('/', function(req, res) {
-	res.render('index', { message: 'test', title: 'test' });
+	const programs = [];
+	res.render('index', { programs });
+
+	Program.find({}).exec().then((error,items)=>{
+		res.send(items.length);
+	});
 });
 
-app.post('/traning_program', function(req, res) {
+app.post('/program', function(req, res) {
   new Program().save((err, item) => {
-    res.redirect('/traning_program/' + item._id);
+    res.redirect('/program/' + item._id);
   });
 });
 
-app.get('/traning_program/:id', function(req, res) {
+app.get('/program/:id', function(req, res) {
   const traningId = req.params.id;
   res.send(traningId);
 });
