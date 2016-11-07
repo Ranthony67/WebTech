@@ -1,8 +1,24 @@
-html
-  head
-    title= title
-  body
-    h1= message
+extends layout.pug
+
+block append content
+  .row
+    table.table
+      thead
+        tr
+          th Test
+          th
+          th
+          th
+      tbody
+        each program in programs
+          tr
+            td= program._id
+            td
+              a(href='program/' + program._id) Vis program
+            td
+              a(href='program/' + program._id + '/add_exercise') Tilføj øvelse
+            td
+              a(href='program/' + program._id + '/delete') Slet program
 
     form(action='/program' method='post')
-      input(type='submit' value='Create a new traning program')
+    input.btn.btn-default(type='submit' value='Create a new traning program')
