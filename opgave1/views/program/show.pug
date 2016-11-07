@@ -1,27 +1,36 @@
 extends ../layout.pug
 
 block append content
-  table.table
-    thead
-      tr
-        th Øvelse
-        th Beskrivelse
-        th Set
-        th Gentagelser/tid
-    tbody
-      if exercises.length == 0
-        tr
-          td(colspan='4') Der er ingen øvelser.
-      each exercise in exercises
-        tr
-          td= exercise.name
-          td= exercise.description
-          td= exercise.sets
-          td= exercise.repetition
+  .row
+    .col-xs-12
+      table.table
+        thead
+          tr
+            th Øvelse
+            th Beskrivelse
+            th Set
+            th Gentagelser/tid
+        tbody
+          if exercises.length == 0
+            tr
+              td(colspan='4') Der er ingen øvelser.
 
-  form(action='/program' method='post')
-    input(type='text' name='name' placeholder='Øvelse')
-    input(type='text' name='description' placeholder='Beskrivelse')
-    input(type='text' name='sets' placeholder='Set')
-    input(type='text' name='repetition' placeholder='Gentagelser/tid')
-    input(type='submit' value='Tilføj øvelse')
+          each exercise in exercises
+            tr
+              td= exercise.name
+              td= exercise.description
+              td= exercise.sets
+              td= exercise.repetition
+
+  .row
+    .col-xs-6
+      form(action='/program' method='post')
+        .form-group
+          input.form-control(type='text' name='name' placeholder='Øvelse')
+        .form-group
+          input.form-control(type='text' name='description' placeholder='Beskrivelse')
+        .form-group
+          input.form-control(type='text' name='sets' placeholder='Set')
+        .form-group
+          input.form-control(type='text' name='repetition' placeholder='Gentagelser/tid')
+        input.btn.btn-primary(type='submit' value='Tilføj øvelse')
