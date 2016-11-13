@@ -2,6 +2,8 @@ var router = require('express').Router();
 var Program = require('../../models/program');
 var isAuthenticated = require('../../utils/is_authenticated');
 
+router.use('/:id/exercises', require('./exercise'));
+
 router.post('/', isAuthenticated, function (req, res) {
   new Program().save((error, item) => {
     res.send({id: item._id});
@@ -14,10 +16,10 @@ router.get('/', isAuthenticated, function (req, res) {
   });
 });
 
-router.get('/:id', isAuthenticated, function (req, res)=> {
+router.get('/:id', isAuthenticated, (req, res) => {
   const programId = req.params.id;
 
-  Program.findOne({_id: programId}, (error, item)=> {
+  Program.findOne({_id: programId}, (error, item) => {
     if (item === null) {
       res.status(404).send({error: {status: 404, message: 'Not found'}});
       return;
