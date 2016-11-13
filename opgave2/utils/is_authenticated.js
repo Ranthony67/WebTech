@@ -8,7 +8,8 @@ function isAuthenticated(req, res, next) {
       return next();
     }
 
-    res.send({error: {status: 404, message: 'Unauthorized'}});
+    res.status(401);
+    res.send({error: {status: 401, message: 'Unauthorized'}});
   });
 }
 
