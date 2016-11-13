@@ -13,16 +13,14 @@ router.post('/sign_up', (req, res) => {
   var rawPassword = req.body.password;
 
   if (!email || !rawPassword) {
-    res.status(422);
-    res.send({error: {status: 422, message: 'Missing params'}});
+    res.status(422).send({error: {status: 422, message: 'Missing params'}});
     return;
   }
 
 
   User.findOne({email: email}, (err, user) => {
     if (user !== null) {
-      res.status(422);
-      res.send({error: {status: 422, message: 'User already exists'}});
+      res.status(422).send({error: {status: 422, message: 'User already exists'}});
       return;
     }
 
