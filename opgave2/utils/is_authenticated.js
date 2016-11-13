@@ -5,6 +5,7 @@ function isAuthenticated(req, res, next) {
 
   User.findOne({token: token}, (err, user) => {
     if (user !== null) {
+      req.user = user;
       return next();
     }
 

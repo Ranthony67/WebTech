@@ -2,15 +2,18 @@ var router = require('express').Router();
 var Program = require('../../models/program');
 var isAuthenticated = require('../../utils/is_authenticated');
 
-router.use('/:id/exercises', require('./exercise'));
+router.use('/:programId/exercises', require('./exercise'));
 
-router.post('/', isAuthenticated, function (req, res) {
-  new Program().save((error, item) => {
-    res.send({id: item._id});
+router.post('/', isAuthenticated, (req, res) => {
+  var program = new Program();
+  program.done = false;
+
+  program.save((error, program) => {
+    res.send({program: program});
   });
 });
 
-router.get('/', isAuthenticated, function (req, res) {
+router.get('/', isAuthenticated, (req, res) => {
   Program.find({}, (err, programs) => {
     res.send({programs: programs});
   });
@@ -19,20 +22,20 @@ router.get('/', isAuthenticated, function (req, res) {
 router.get('/:id', isAuthenticated, (req, res) => {
   const programId = req.params.id;
 
-  Program.findOne({_id: programId}, (error, item) => {
-    if (item === null) {
+  Program.findOne({_id: programId}, (error, program) => {
+    if (program === null) {
       res.status(404).send({error: {status: 404, message: 'Not found'}});
       return;
     }
 
-    res.send({item});
+    res.send({program: program});
   });
 });
 
-router.put('/:id', isAuthenticated, function (req, res) {
+router.put('/:id', isAuthenticated, (req, res) => {
   const programId = req.params.id;
 
-  Program.findOne({_id: programId}, (error, item)=> {
+  Program.findOne({_id: programId}, (error, item) => {
 
     if (item === null) {
       res.status(404).send({error: {status: 404, message: 'Not found'}});
@@ -46,7 +49,7 @@ router.put('/:id', isAuthenticated, function (req, res) {
   });
 });
 
-router.post('/:id/delete', isAuthenticated, function (req, res) {
+router.delete('/:id', isAuthenticated, (req, res) => {
   const programId = req.params.id;
   Program.findOne({_id: programId}).remove().exec();
   res.status(204).send("No Content");
