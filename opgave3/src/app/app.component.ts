@@ -7,8 +7,6 @@ import {BackendService, Program} from "./backend.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
-
   private programs: Array<Program>;
 
   constructor(private backendService: BackendService) {
@@ -36,13 +34,6 @@ export class AppComponent {
       });
   }
 
-  getPrograms(): void {
-    this.backendService.getPrograms()
-      .then(programs => {
-        this.programs = programs;
-        console.log(programs);
-      })
-  }
 
   getExercises(): void {
     this.backendService.getExercises(this.programs[0]._id)

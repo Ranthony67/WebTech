@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {BackendService} from "../backend.service";
 
 @Component({
   selector: 'app-navbar-header',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private backendService: BackendService) { }
 
   ngOnInit() {
+  }
+
+  isAuthenticated() {
+    return this.backendService.isAuthenticated();
   }
 
 }

@@ -39,12 +39,20 @@ export class BackendService {
     return localStorage.getItem(this.TOKEN_STORAGE_KEY);
   }
 
-  private post(url: string, params: string): Promise<Response> {
+  private post(url: string, params: string = ""): Promise<Response> {
     return this.http.post(url, params, {headers: this.defaultHeaders()}).toPromise();
   }
 
   private get(url: string): Promise<Response> {
     return this.http.get(url, {headers: this.defaultHeaders()}).toPromise();
+  }
+
+  createProgram(): Promise<Program> {
+    return this
+      .post(`${this.baseUrl}/programs`)
+      .then(res => {
+        return res.json().program
+      });
   }
 
   public getPrograms(): Promise<Array<Program>> {

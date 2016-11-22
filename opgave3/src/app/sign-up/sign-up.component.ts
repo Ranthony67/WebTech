@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {BackendService} from "../backend.service";
-import {FormBuilder, FormGroup, FormControl} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {BackendService} from "../backend.service";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.css']
 })
-export class LoginComponent implements OnInit {
+export class SignUpComponent implements OnInit {
   public loginForm;
 
   constructor(private router: Router, private backendService: BackendService, private _fb: FormBuilder) {
@@ -21,10 +21,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  signIn(event: Event) {
+  signUp(event: Event) {
     event.preventDefault();
 
-    this.backendService.signIn(this.loginForm.value.email, this.loginForm.value.password)
+    this.backendService.signUp(this.loginForm.value.email, this.loginForm.value.password)
       .then(res => {
         if (res) {
           this.router.navigate(['/']);

@@ -1,3 +1,28 @@
-<p>
-  programs works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Program ID</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let program of programs">
+          <td>
+            <a [routerLink]="['/programs', program._id]">
+              {{program._id}}
+            </a>
+          </td>
+          <td>
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <button (click)="createProgram()" class="btn btn-default" type="submit">Create a new training program</button>
+    </div>
+  </div>
+</div>
