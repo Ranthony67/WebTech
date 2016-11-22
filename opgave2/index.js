@@ -9,6 +9,13 @@ mongoose.Promise = global.Promise;
 var app = express();
 app.use(bodyParser.json({extended: true}));
 
+// Fixes CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Token, Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // MongoDB setup with mongoose
 var db = mongoose.connection;
 
