@@ -28,7 +28,6 @@ export class ProgramsComponent implements OnInit {
     this.backendService.getPrograms()
       .then(programs => {
         this.programs = programs;
-        console.log(programs);
       })
   }
 

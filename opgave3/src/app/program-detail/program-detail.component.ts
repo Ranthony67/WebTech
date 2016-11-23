@@ -8,28 +8,34 @@ import {Router} from "@angular/router";
   styleUrls: ['./program-detail.component.css']
 })
 export class ProgramDetailComponent implements OnInit {
-
+  private exercises: Array<Exercise>;
+  
   constructor(private router: Router, private backendService: BackendService) { }
 
   ngOnInit() {
+
   }
 
   createExercise(): void{
 
   }
-
-  getExercises(): void{
-
+  /*
+  getExercises(programid: string): void{
+  	this.backendService.getExercises(programid)
+  		.then(exercises => {
+  			this.exercises = exercises;
+  		})
   }
+  */
+  markExerciseAsDone(programid: string, exerciseid: string, done: boolean): void {
 
-  markExerciseAsDone(): void {
-  	
   }
 
 }
 
 
 
+/*
 @Component({
   selector: 'app-programs',
   templateUrl: './programs.component.html',
@@ -66,3 +72,4 @@ export class ProgramsComponent implements OnInit {
     })
   }
 }
+*/
