@@ -16,7 +16,9 @@
             </a>
           </td>
           <td>
-
+            <input type="checkbox"
+                    id="{{program._id}}"
+                    (change)="markAsDone(program._id, true)"/>
           </td>
         </tr>
         </tbody>
