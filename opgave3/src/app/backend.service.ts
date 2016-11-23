@@ -84,7 +84,7 @@ export class BackendService {
     const params: Object = {done: done}
 
     return this
-      .put(`${this.baseUrl}/programs/{programid}`, JSON.stringify(params))
+      .put(`${this.baseUrl}/programs/${programid}`, JSON.stringify(params))
       .then(res => {
           console.log(res.json());
           return res.json().programs;
@@ -94,9 +94,10 @@ export class BackendService {
         });
   }
 
+
  createExercise(programid: string, exercise: Exercise): Promise<Exercise> {
     return this
-      .post(`${this.baseUrl}/programs/${programid}/exercises`, JSON.stringify(params))
+      .post(`${this.baseUrl}/programs/${programid}/exercises`)
       .then(res =>{ 
         return res.json().exercise;
       });
