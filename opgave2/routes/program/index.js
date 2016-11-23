@@ -36,6 +36,10 @@ router.put('/:id', isAuthenticated, (req, res) => {
   const programId = req.params.id;
 
   Program.findOne({_id: programId}, (error, item) => {
+    if (error) {
+      res.status(403).send({error: {status: 403, message: 'Error'}});
+      return;
+    }
 
     if (item === null) {
       res.status(404).send({error: {status: 404, message: 'Not found'}});
@@ -44,8 +48,9 @@ router.put('/:id', isAuthenticated, (req, res) => {
 
     item.done = req.body.done;
 
-    item.save().exec();
-    res.send(item);
+    item.save(() => {
+      res.send(item);
+    });
   });
 });
 
