@@ -62,6 +62,10 @@ export class BackendService {
     return this.http.patch(url, params, {headers: this.defaultHeaders()}).toPromise();
   }
 
+  private delete(url: string) : Promise<Response> {
+    return this.http.delete(url, {headers: this.defaultHeaders()}).toPromise();
+  }
+
   private get(url: string): Promise<Response> {
     return this.http.get(url, {headers: this.defaultHeaders()}).toPromise();
   }
@@ -98,19 +102,27 @@ export class BackendService {
         });
   }
 
-  markExerciseAsDone(programid: string, exerciseid: string, done: boolean): Promise<Exercise> {
+    markExerciseAsDone(programid: string, exerciseid: string, done: boolean): Promise<Exercise> {
     const params: Object = {done: done};
     return this.patch(`${this.baseUrl}/programs/${programid}/exercises/${exerciseid}`)
       .then(res => { 
-        console.log(res.json);
-        return res.json().exercise;
+        return res.json();
       })
       .catch(_ => {
         console.log("[MarkExerciseAsDone] Failed");
       })
   }
 
+  public deleteProgram(programId: string) : Promise<void> {
+    return this
+      .delete(`${this.baseUrl}/programs/${programId}`)
+      .then(res => {
+        console.log(res.json());
+      })
+  }
+
  createExercise(programid: string, exercise: Object): Promise<Exercise> {
+  console.log(exercise);
     return this
       .post(`${this.baseUrl}/programs/${programid}/exercises`, JSON.stringify(exercise))
       .then(res =>{ 
@@ -127,6 +139,8 @@ export class BackendService {
         return [];
       });
   }
+
+
 
   public signOut(): void {
     this.authToken = null;

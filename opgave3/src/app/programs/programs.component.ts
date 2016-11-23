@@ -36,4 +36,13 @@ export class ProgramsComponent implements OnInit {
         console.log("[MarkAsDone] Success");
     })
   }
+
+/*  deleteProgram(programId: string): void {
+    this.backendService.deleteProgram(programId)
+      .then(_ => {
+        this.getPrograms();
+        this.router.navigate([`/programs/`]);}
+      );
+  }
+*/
 }

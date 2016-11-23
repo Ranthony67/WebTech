@@ -12,10 +12,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let exercise of Exercises">
-          <td>{{exerise.name}}</td>
+        <tr *ngFor="let exercise of exercises">
+          <td>{{exercise.name}}</td>
           <td>{{exercise.description}}</td>
           <td>{{exercise.sets}}</td>
+          <td>{{exercise.repetition}}</td>
           <td>
             <input type="checkbox"
                     id="{{exercise._id}}"
@@ -28,8 +29,8 @@
     <form #exerciseForm="ngForm" novalidate (submit)="onSubmit(exerciseForm)">
     	<input ngModel name="name" placeholder="Øvelse"/> <br/>
     	<input ngModel name="description" placeholder="Beskrivelse"/> <br/>
-    	<input ngModel name="set" placeholder="Sæt"/> <br/>
-    	<input ngModel name="rep" placeholder="Gentagelser/tid"/> <br/>
+    	<input ngModel name="sets" placeholder="Sæt"/> <br/>
+    	<input ngModel name="repetition" placeholder="Gentagelser/tid"/> <br/>
 
     	<button>Send</button>
     </form>
