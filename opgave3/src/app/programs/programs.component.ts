@@ -20,7 +20,7 @@ export class ProgramsComponent implements OnInit {
 
   createProgram(): void {
     this.backendService.createProgram().then(program => {
-      this.router.navigate([`/programs/${program._id}`])
+      this.router.navigate([`/programs/${program._id}`]);
     })
   }
 
@@ -33,7 +33,7 @@ export class ProgramsComponent implements OnInit {
 
   markAsDone(programid: string, done: boolean): void {
     this.backendService.markAsDone(programid, done).then(exercise => {
-        console.log("[MarkAsDone] Test from programs.component.ts");
+        console.log("[MarkAsDone] Success");
     })
   }
 }

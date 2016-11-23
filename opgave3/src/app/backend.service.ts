@@ -58,6 +58,10 @@ export class BackendService {
     return this.http.put(url, params, {headers: this.defaultHeaders()}).toPromise();
   }
 
+  private patch(url: string, params: string="") : Promise<Response> {
+    return this.http.patch(url, params, {headers: this.defaultHeaders()}).toPromise();
+  }
+
   private get(url: string): Promise<Response> {
     return this.http.get(url, {headers: this.defaultHeaders()}).toPromise();
   }
@@ -81,29 +85,40 @@ export class BackendService {
   }
 
   markAsDone(programid: string, done: boolean): Promise<Program> {
-    const params: Object = {done: done}
+    const params: Object = {done: done};
 
     return this
       .put(`${this.baseUrl}/programs/${programid}`, JSON.stringify(params))
       .then(res => {
           console.log(res.json());
-          return res.json().programs;
+          return res.json().program;
         })
         .catch(_ => {
-          console.log("[MarkAsDone] Test Failed"); 
+          console.log("[MarkAsDone] Failed"); 
         });
   }
 
+  markExerciseAsDone(programid: string, exerciseid: string, done: boolean): Promise<Exercise> {
+    const params: Object = {done: done};
+    return this.patch(`${this.baseUrl}/programs/${programid}/exercises/${exerciseid}`)
+      .then(res => { 
+        console.log(res.json);
+        return res.json().exercise;
+      })
+      .catch(_ => {
+        console.log("[MarkExerciseAsDone] Failed");
+      })
+  }
 
- createExercise(programid: string, exercise: Exercise): Promise<Exercise> {
+ createExercise(programid: string, exercise: Object): Promise<Exercise> {
     return this
-      .post(`${this.baseUrl}/programs/${programid}/exercises`)
+      .post(`${this.baseUrl}/programs/${programid}/exercises`, JSON.stringify(exercise))
       .then(res =>{ 
         return res.json().exercise;
       });
   } 
   
-  public getExercises(programid: string): Promise<Array<Object>> {
+  public getExercises(programid: string): Promise<Array<Exercise>> {
     return this.get(`${this.baseUrl}/programs/${programid}/exercises`)
       .then(res => {
         return res.json().exercises;
