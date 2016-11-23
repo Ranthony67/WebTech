@@ -1,3 +1,39 @@
-<p>
-  program-detail works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Øvelse</th>
+          <th>Beskrivelse</th>
+          <th>Set</th>
+          <th>Gentagelser/tid</th>
+          <th>Gennemført?</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let exercise of Exercises">
+          <td>{{exerise.name}}</td>
+          <td>{{exercise.description}}</td>
+          <td>{{exercise.sets}}</td>
+          <td>
+            <input type="checkbox"
+                    id="{{exercise._id}}"
+                    (change)="markExerciseAsDone(exercise.program_id, exercise._id, true)"/>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+    <form #exerciseForm="ngForm" novalidate (submit)="onSubmit(exerciseForm)">
+    	<input ngModel name="name" placeholder="Øvelse"/> <br/>
+    	<input ngModel name="description" placeholder="Beskrivelse"/> <br/>
+    	<input ngModel name="set" placeholder="Sæt"/> <br/>
+    	<input ngModel name="rep" placeholder="Gentagelser/tid"/> <br/>
+
+    	<button>Send</button>
+    </form>
+
+    </div>
+  </div>
+</div>
