@@ -6,6 +6,7 @@
         <tr>
           <th>Program ID</th>
           <th>Actions</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,7 @@
                     id="{{program._id}}"
                     (change)="markAsDone(program._id, true)"/>
           </td>
+          <!-- <td><button (click)="deleteProgram()" class="btn btn-danger">Slet Program</button></td> -->
         </tr>
         </tbody>
       </table>

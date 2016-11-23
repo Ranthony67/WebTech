@@ -11,24 +11,23 @@ import { NgForm } from "@angular/forms";
 export class ProgramDetailComponent implements OnInit {
   private exercises: Array<Exercise>;
   private programId: string;
-  private route: ActivatedRoute;
 
-  constructor(private router: Router, private backendService: BackendService) {
-  	//this.programId = this.route.params.programid;
+  constructor(private router: Router, private backendService: BackendService, private route: ActivatedRoute) {
+  	this.programId = this.route.params._value.id;
+  	this.getExercises(this.programId);
   }
 
   ngOnInit() {
-  	//this.getExercises();
   }
 
   onSubmit(form: NgForm){
-  	//this.createExercise( , , )
+  	this.createExercise(this.programId, form.value );
   }
 
-  createExercise(programid: string, exercise: Exercise): void{
+  createExercise(programid: string, exercise: Object): void{
   	this.backendService.createExercise(programid, exercise).then(exercise => {
   		this.router.navigate([`/programs/${programid}`]);
-  		this.getExercises(this.programId);
+  		this.getExercises(programid);
   	})
   }
 
@@ -40,9 +39,10 @@ export class ProgramDetailComponent implements OnInit {
   }
   
   markExerciseAsDone(programid: string, exerciseid: string, done: boolean): void {
-  	this.backendService.markExerciseAsDone(programid, exerciseid, done).then(exercise => {
-  		console.log("[MarkExerciseAsDone] Success");
-  	})
+  	this.backendService.markExerciseAsDone(programid, exerciseid, done)
+  		.then(exercise => {
+  			console.log(exercise);
+  		})
   }
 
 }
