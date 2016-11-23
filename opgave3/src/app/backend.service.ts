@@ -6,6 +6,17 @@ import 'rxjs/add/operator/toPromise';
 
 export class Program {
   public _id: string;
+  public done: boolean;
+}
+
+export class Exercise{
+  public _id: string;
+  public program_id: string;
+  public name: string;
+  public description: string;
+  public sets: string; 
+  public repetition: string;
+  public done: boolean;
 }
 
 @Injectable()
@@ -43,6 +54,10 @@ export class BackendService {
     return this.http.post(url, params, {headers: this.defaultHeaders()}).toPromise();
   }
 
+  private put(url: string, params: string=""): Promise<Response> {
+    return this.http.put(url, params, {headers: this.defaultHeaders()}).toPromise();
+  }
+
   private get(url: string): Promise<Response> {
     return this.http.get(url, {headers: this.defaultHeaders()}).toPromise();
   }
@@ -65,8 +80,30 @@ export class BackendService {
       });
   }
 
-  public getExercises(programId: string): Promise<Array<Object>> {
-    return this.get(`${this.baseUrl}/programs/${programId}/exercises`)
+  markAsDone(programid: string, done: boolean): Promise<Program> {
+    const params: Object = {done: done}
+
+    return this
+      .put(`${this.baseUrl}/programs/{programid}`, JSON.stringify(params))
+      .then(res => {
+          console.log(res.json());
+          return res.json().programs;
+        })
+        .catch(_ => {
+          console.log("[MarkAsDone] Test Failed"); 
+        });
+  }
+
+ createExercise(programid: string, exercise: Exercise): Promise<Exercise> {
+    return this
+      .post(`${this.baseUrl}/programs/${programid}/exercises`, JSON.stringify(params))
+      .then(res =>{ 
+        return res.json().exercise;
+      });
+  } 
+  
+  public getExercises(programid: string): Promise<Array<Object>> {
+    return this.get(`${this.baseUrl}/programs/${programid}/exercises`)
       .then(res => {
         return res.json().exercises;
       })
@@ -105,7 +142,6 @@ export class BackendService {
     return this
       .post(`${this.baseUrl}/users/sign_in`, JSON.stringify(params))
       .then(res => {
-        console.log(res.json());
 
         const token = res.json().token;
         this.saveToken(token);

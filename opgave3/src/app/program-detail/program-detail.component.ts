@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {BackendService, Exercise} from "../backend.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-program-detail',
@@ -7,9 +9,60 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProgramDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private backendService: BackendService) { }
 
   ngOnInit() {
   }
 
+  createExercise(): void{
+
+  }
+
+  getExercises(): void{
+
+  }
+
+  markExerciseAsDone(): void {
+  	
+  }
+
+}
+
+
+
+@Component({
+  selector: 'app-programs',
+  templateUrl: './programs.component.html',
+  styleUrls: ['./programs.component.css']
+})
+export class ProgramsComponent implements OnInit {
+  private programs: Array<Program>;
+
+  constructor(private router: Router, private backendService: BackendService) {
+  }
+
+  ngOnInit() {
+
+    this.getPrograms();
+  }
+
+  createProgram(): void {
+    this.backendService.createProgram().then(program => {
+      this.router.navigate([`/programs/${program._id}`])
+    })
+  }
+
+  getPrograms(): void {
+    this.backendService.getPrograms()
+      .then(programs => {
+        this.programs = programs;
+        console.log(programs);
+      })
+  }
+
+  markAsDone(programid: string, done: boolean): void {
+    this.backendService.markAsDone(programid, done).then(exercise => {
+        console.log("[MarkAsDone] Test from programs.component.ts");
+    })
+  }
 }

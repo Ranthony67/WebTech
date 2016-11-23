@@ -32,4 +32,9 @@ export class ProgramsComponent implements OnInit {
       })
   }
 
+  markAsDone(programid: string, done: boolean): void {
+    this.backendService.markAsDone(programid, done).then(exercise => {
+        console.log("[MarkAsDone] Test from programs.component.ts");
+    })
+  }
 }
