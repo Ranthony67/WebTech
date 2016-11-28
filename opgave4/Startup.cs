@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -29,6 +28,12 @@ namespace WebOpgave4
         {
             // Add framework services.
             services.AddMvc();
+
+            // mysql://b53fce09ced81c:c00add37@eu-cdbr-west-01.cleardb.com/heroku_eb6883ea620f8fe?reconnect=true
+            var connectionString = "Host=eu-cdbr-west-01.cleardb.com;Database=heroku_eb6883ea620f8fe;User ID=b53fce09ced81c;Password=c00add37";
+            services.AddDbContext<Models.DatabaseContext>(options =>
+                options.UseMySql(connectionString)
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

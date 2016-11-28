@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
-namespace WebOpgave4.Models {
-  class DatabaseContext : DbContext {
-    // TODO: Setup config
-  }
+namespace WebOpgave4.Models
+{
+    public class DatabaseContext : DbContext
+    {
+        public virtual DbSet<Category> Categories { get; set; }
+    }
 }
