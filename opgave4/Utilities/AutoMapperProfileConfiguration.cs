@@ -9,6 +9,7 @@ namespace WebOpgave4
         protected override void Configure()
         {
             CreateMap<Category, CategoryPostDTO>();
+            CreateMap<CategoryGetDTO, Category>();
         }
     }
 }

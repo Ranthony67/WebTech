@@ -1,9 +1,17 @@
-using System.Collections.Generic;
-using WebOpgave4.Models;
+using System.ComponentModel.DataAnnotations;
 
-namespace WebOpgave4.DAL.DTOs{
-    public class CategoryPostDTO{
+namespace WebOpgave4.DAL.DTOs
+{
+    public class CategoryGetDTO
+    {
+        public int CategoryId { get; set; }
         public string Name { get; set; }
-        public ICollection<ComponentType> ComponentTypes { get; protected set; }
+    }
+
+    public class CategoryPostDTO
+    {
+
+        [Required]
+        public string Name { get; set; }
     }
 }
