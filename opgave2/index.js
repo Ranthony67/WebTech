@@ -13,7 +13,7 @@ app.use(bodyParser.json({extended: true}));
 app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "Token, Origin, X-Requested-With, Content-Type, Accept");
-  res.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
+  res.setHeader("Access-Control-Allow-Methods", "PATCH, POST, GET, DELETE, PUT, OPTIONS");
   next();
 });
 
