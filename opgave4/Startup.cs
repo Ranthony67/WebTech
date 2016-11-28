@@ -1,5 +1,9 @@
 using System;
 using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +17,10 @@ namespace WebOpgave4
     {
         public Startup(IHostingEnvironment env)
         {
+            _mapperConfiguration = new MapperConfiguration(cfg => {
+                cfg.AddProfile(new AutoMapperProfileConfiguration());
+            });
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -22,11 +30,13 @@ namespace WebOpgave4
         }
 
         public IConfigurationRoot Configuration { get; }
+        private MapperConfiguration _mapperConfiguration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddSingleton<IMapper>(sp => _mapperConfiguration.CreateMapper());
             services.AddMvc();
 
             // mysql://b53fce09ced81c:c00add37@eu-cdbr-west-01.cleardb.com/heroku_eb6883ea620f8fe?reconnect=true
