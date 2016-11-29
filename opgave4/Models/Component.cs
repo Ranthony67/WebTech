@@ -1,3 +1,5 @@
+using static Enums;
+
 namespace WebOpgave4.Models
 {
     public class Component
