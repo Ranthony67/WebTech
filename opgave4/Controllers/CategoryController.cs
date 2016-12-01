@@ -53,7 +53,7 @@ namespace WebOpgave4.Controllers
             _context.Categories.Remove(category);
             _context.SaveChanges();
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return NoContent();
         }
     }
 }

@@ -16,9 +16,9 @@ namespace WebOpgave4.Controllers
 
         public IActionResult Index()
         {
-            List<Category> list =  _context.Categories.ToList();
+            //List<Category> list =  _context.Categories.ToList();
 
-            ViewData["test"] = list.Count;
+            //ViewData["test"] = list.Count;
             return View();
         }
 

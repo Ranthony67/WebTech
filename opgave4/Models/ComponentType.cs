@@ -5,12 +5,6 @@ namespace WebOpgave4.Models
 {
     public class ComponentType
     {
-        public ComponentType()
-        {
-            Components = new List<Component>();
-            Categories = new List<Category>();
-        }
-
         public long ComponentTypeId { get; set; }
         public string ComponentName { get; set; }
         public string ComponentInfo { get; set; }
@@ -22,8 +16,7 @@ namespace WebOpgave4.Models
         public string WikiLink { get; set; }
         public string AdminComment { get; set; }
         public virtual ESImage Image { get; set; }
-        public ICollection<Component> Components { get; protected set; }
-        public ICollection<Category> Categories { get; protected set; }
-
+        public virtual ICollection<Component> Components { get; protected set; } = new HashSet<Component>();
+        public virtual ICollection<CategoryComponentType> CategoryComponentTypes { get; protected set; } = new HashSet<CategoryComponentType>();
     }
 }
