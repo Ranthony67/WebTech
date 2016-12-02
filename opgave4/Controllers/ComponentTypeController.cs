@@ -5,7 +5,7 @@ using WebOpgave4.Models.DTOs;
 
 namespace WebOpgave4.Controllers
 {
-    [Route("componenttype")]
+    [Route("component_types")]
     public class ComponentTypeController : Controller
     {
         private IMapper _mapper;
@@ -25,9 +25,17 @@ namespace WebOpgave4.Controllers
                 return BadRequest();
 
             ComponentType componentType = new ComponentType();
-            componentType.ComponentName = componentTypeDTO.ComponentName;
-            componentTypeDTO.ComponentInfo ? componentType.ComponentInfo = componentTypeDTO.ComponentInfo : "";
-            componentTypeDTO.Location = componentType.Location = componentTypeDTO.Location : "";
+            componentType.Name = componentTypeDTO.Name;
+            componentType.Status = componentTypeDTO.Status;
+            componentType.Manufacturer = componentTypeDTO.Manufacturer;
+
+            if(componentTypeDTO.Info != null) componentType.Info = componentTypeDTO.Info;
+            if(componentTypeDTO.Location != null) componentType.Location = componentTypeDTO.Location;
+            if(componentTypeDTO.Datasheet != null) componentType.Datasheet = componentTypeDTO.Datasheet;
+            if(componentTypeDTO.ImageUrl != null) componentType.ImageUrl = componentTypeDTO.ImageUrl;
+            if(componentTypeDTO.WikiLink != null) componentType.WikiLink = componentTypeDTO.WikiLink;
+            if(componentTypeDTO.AdminComment != null) componentType.AdminComment = componentTypeDTO.AdminComment;
+            if(componentTypeDTO.ImageId != null) componentType.ImageId = componentTypeDTO.ImageId;
 
             _context.Add(componentType);
             _context.SaveChanges();

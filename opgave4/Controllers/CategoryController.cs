@@ -6,7 +6,7 @@ using WebOpgave4.Models;
 
 namespace WebOpgave4.Controllers
 {
-    [Route("category")]
+    [Route("categories")]
     public class CategoryController : Controller
     {
         private IMapper _mapper;
