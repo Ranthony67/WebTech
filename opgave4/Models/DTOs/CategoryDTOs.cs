@@ -1,6 +1,7 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebOpgave4.DAL.DTOs
+namespace WebOpgave4.Models.DTOs
 {
     public class CategoryGetDTO
     {
@@ -10,8 +11,8 @@ namespace WebOpgave4.DAL.DTOs
 
     public class CategoryPostDTO
     {
-
         [Required]
         public string Name { get; set; }
+
     }
 }

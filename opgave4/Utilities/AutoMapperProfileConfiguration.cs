@@ -1,5 +1,5 @@
 using AutoMapper;
-using WebOpgave4.DAL.DTOs;
+using WebOpgave4.Models.DTOs;
 using WebOpgave4.Models;
 
 namespace WebOpgave4
@@ -9,7 +9,8 @@ namespace WebOpgave4
         protected override void Configure()
         {
             CreateMap<Category, CategoryPostDTO>();
-            CreateMap<CategoryGetDTO, Category>();
+
+            CreateMap<Category, CategoryGetDTO>().ReverseMap();
         }
     }
 }

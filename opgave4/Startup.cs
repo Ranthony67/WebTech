@@ -1,12 +1,6 @@
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -17,7 +11,8 @@ namespace WebOpgave4
     {
         public Startup(IHostingEnvironment env)
         {
-            _mapperConfiguration = new MapperConfiguration(cfg => {
+            _mapperConfiguration = new MapperConfiguration(cfg =>
+            {
                 cfg.AddProfile(new AutoMapperProfileConfiguration());
             });
 
@@ -37,7 +32,8 @@ namespace WebOpgave4
         {
             // Add framework services.
             services.AddSingleton<IMapper>(sp => _mapperConfiguration.CreateMapper());
-            services.AddMvc();
+            services.AddMvc()
+                    .AddJsonOptions(opt => opt.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver());
 
             // mysql://b53fce09ced81c:c00add37@eu-cdbr-west-01.cleardb.com/heroku_eb6883ea620f8fe?reconnect=true
             //var connectionString = "Host=eu-cdbr-west-01.cleardb.com;Database=heroku_eb6883ea620f8fe;User ID=b53fce09ced81c;Password=c00add37";
