@@ -13,6 +13,7 @@ namespace WebOpgave4
 
             // Works for some reason
             CreateMap<Category, CategoryGetDTO>().ReverseMap();
+            CreateMap<Component, ComponentPostDTO>().ReverseMap();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace WebOpgave4.Controllers
 
             var dto = _mapper.Map<CategoryGetDTO>(category);
             dto.CategoryId = category.CategoryId;
-            return StatusCode(200);
+            return Ok(dto);
         }
 
         [HttpPut]
