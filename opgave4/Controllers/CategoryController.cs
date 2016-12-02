@@ -23,26 +23,28 @@ namespace WebOpgave4.Controllers
         {            
             if(!ModelState.IsValid) 
                 return BadRequest(ModelState);
-                       
-            var category = _mapper.Map<Category>(categoryDTO);
+
+            Category category = new Category();
+            category.Name = categoryDTO.Name;
 
             _context.Categories.Add(category);
             _context.SaveChanges();
 
             var dto = _mapper.Map<CategoryGetDTO>(category);
             dto.CategoryId = category.CategoryId;
-            return CreatedAtRoute(routeName: "CategoryController", routeValues: new {id = category.CategoryId}, value: dto);
+            return StatusCode(200);
         }
 
         [HttpPut]
-        [Route("/{id:int}")]
+        [Route("{id:int}")]
         public IActionResult UpdateCategory([FromBody] CategoryPostDTO categoryDTO, int id)
         {
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
-
-            var category = _mapper.Map<Category>(categoryDTO);
+            
+            Category category = new Category();
             category.CategoryId = id;
+            category.Name = categoryDTO.Name;
 
             _context.Categories.Update(category);
             _context.SaveChanges();
@@ -51,7 +53,7 @@ namespace WebOpgave4.Controllers
             return Ok(dto);
         }
 
-        [Route("/{id:int}")]
+        [Route("{id:int}")]
         public IActionResult DeleteCategory(int id)
         {
             var category = _context.Categories.Find(id);

@@ -8,8 +8,10 @@ namespace WebOpgave4
     {
         protected override void Configure()
         {
-            CreateMap<Category, CategoryPostDTO>();
+            // Doesn't work for some reason
+            //CreateMap<Category, CategoryPostDTO>();
 
+            // Works for some reason
             CreateMap<Category, CategoryGetDTO>().ReverseMap();
         }
     }
