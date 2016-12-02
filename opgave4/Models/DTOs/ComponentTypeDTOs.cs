@@ -21,16 +21,18 @@ namespace WebOpgave4.Models.DTOs
     }
     public class ComponentTypePostDTO
     {
+        [Required]
         public string ComponentName { get; set; }
         public string ComponentInfo { get; set; }
         public string Location { get; set; }
+        [Required]
         public ComponentTypeStatus Status { get; set; }
         public string Datasheet { get; set; }
         public string ImageUrl { get; set; }
+        [Required]
         public string Manufacturer { get; set; }
         public string WikiLink { get; set; }
         public string AdminComment { get; set; }
         public virtual ESImage Image { get; set; }
-
     }
 }

@@ -24,7 +24,10 @@ namespace WebOpgave4.Controllers
             if(!ModelState.IsValid)
                 return BadRequest();
 
-            var componentType = _mapper.Map<ComponentType>(componentTypeDTO);
+            ComponentType componentType = new ComponentType();
+            componentType.ComponentName = componentTypeDTO.ComponentName;
+            componentTypeDTO.ComponentInfo ? componentType.ComponentInfo = componentTypeDTO.ComponentInfo : "";
+            componentTypeDTO.Location = componentType.Location = componentTypeDTO.Location : "";
 
             _context.Add(componentType);
             _context.SaveChanges();
