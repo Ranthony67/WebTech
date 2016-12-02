@@ -58,6 +58,8 @@ namespace WebOpgave4
 
             app.UseStaticFiles();
 
+            app.UseCors(builder => builder.WithOrigins("*").AllowAnyHeader());
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

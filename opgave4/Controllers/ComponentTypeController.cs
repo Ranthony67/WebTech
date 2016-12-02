@@ -22,7 +22,7 @@ namespace WebOpgave4.Controllers
         public IActionResult CreateComponentType([FromBody] ComponentTypePostDTO componentTypeDTO)
         {
             if(!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest(ModelState);
 
             ComponentType componentType = new ComponentType();
             componentType.Name = componentTypeDTO.Name;

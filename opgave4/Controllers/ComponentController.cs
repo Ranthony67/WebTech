@@ -23,7 +23,7 @@ namespace WebOpgave4.Controllers
         public IActionResult CreateComponent([FromBody] ComponentPostDTO componentDTO)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest(ModelState);
 
             Component component = new Component();
             component.ComponentTypeId = componentDTO.ComponentTypeId;
@@ -60,6 +60,44 @@ namespace WebOpgave4.Controllers
                 return NotFound();
 
             return Ok(component);
+        }
+
+        [HttpPost]
+        [Route("{id:int}")]
+        public IActionResult UpdateComponent([FromBody] ComponentPostDTO componentDTO, int id)
+        {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            Component component = new Component();
+            component.ComponentId = id;
+            component.ComponentTypeId = componentDTO.ComponentTypeId;
+            component.SerialNo = componentDTO.SerialNo;
+            component.Status = componentDTO.Status;
+            component.AdminComment = componentDTO.AdminComment;
+            component.UserComment = componentDTO.UserComment;
+
+            if(componentDTO.CurrentLoanInformationId != null) component.CurrentLoanInformationId = componentDTO.CurrentLoanInformationId;
+
+            _context.Components.Update(component);
+            _context.SaveChanges();
+
+            var dto = _mapper.Map<ComponentGetDTO>(component);
+            return Ok(dto);
+        }
+
+        [Route("{id:long}")]
+        public IActionResult DeleteComponent(long id)
+        {
+            var component = _context.Components.Find(id);
+            
+            if(component == null) 
+                return NotFound();
+
+            _context.Components.Remove(component);
+            _context.SaveChanges();
+
+            return NoContent();
         }
     }
 }

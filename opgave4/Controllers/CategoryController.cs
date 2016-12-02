@@ -58,6 +58,9 @@ namespace WebOpgave4.Controllers
         {
             var category = _context.Categories.Find(id);
 
+            if(category == null)
+                return NotFound();
+            
             _context.Categories.Remove(category);
             _context.SaveChanges();
 
