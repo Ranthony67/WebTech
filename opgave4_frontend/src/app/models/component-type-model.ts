@@ -1,5 +1,5 @@
 export default class ComponentTypeModel {
-  public Id: string;
+  public ComponentTypeId: string;
   public Name: string;
   public Manufacturer: string;
   public Info: string;

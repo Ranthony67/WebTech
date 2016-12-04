@@ -26,15 +26,11 @@
       <div class="panel panel-default">
         <div class="panel-body">
 
-          <p>
-            Category name:
-            <input [value]="categoryEditName" (change)="updateEditName($event);" type="name"/>
-          </p>
+          <form #categoryForm="ngForm" (ngSubmit)="onSubmit($event)">
+            <input #name="ngModel" [(ngModel)]="model.Name" name="Name" placeholder="Name" />
 
-          <button class="btn btn-default" (click)="save();">
-            <i class="fa fa-floppy-o"></i>
-            Save
-          </button>
+            <button type="submit" class="btn btn-default" [disabled]="!categoryForm.form.valid">Save</button>
+          </form>
 
           <button class="btn btn-default" (click)="stopEditing();">
             <i class="fa fa-times"></i>

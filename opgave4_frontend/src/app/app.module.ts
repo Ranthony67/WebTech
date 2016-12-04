@@ -18,6 +18,9 @@ import appRoutes from "./routes";
 import { ComponentDetailComponent } from './component-detail/component-detail.component';
 import { ComponentCategoryListComponent } from './component-category-list/component-category-list.component';
 import { ComponentTypeListComponent } from './component-type-list/component-type-list.component';
+import { SearchForComponentComponent } from './search-for-component/search-for-component.component';
+import { ComponentsByCategoryComponent } from './components-by-category/components-by-category.component';
+import { ComponentsByTypeComponent } from './components-by-type/components-by-type.component';
 
 
 @NgModule({
@@ -31,6 +34,9 @@ import { ComponentTypeListComponent } from './component-type-list/component-type
     ComponentDetailComponent,
     ComponentCategoryListComponent,
     ComponentTypeListComponent,
+    SearchForComponentComponent,
+    ComponentsByCategoryComponent,
+    ComponentsByTypeComponent,
   ],
   imports: [
     BrowserModule,

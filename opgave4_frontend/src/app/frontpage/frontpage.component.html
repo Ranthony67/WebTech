@@ -10,6 +10,7 @@
 
             <form #componentTypeForm="ngForm" (ngSubmit)="onSubmit($event)">
               <input #name="ngModel" [(ngModel)]="model.ComponentNumber" name="ComponentNumber" placeholder="ComponentNumber" />
+              <input #name="ngModel" [(ngModel)]="model.ComponentTypeId" name="ComponentTypeId" placeholder="ComponentTypeId" />
               <input #name="ngModel" [(ngModel)]="model.SerialNo" name="SerialNo" placeholder="SerialNo" />
               <input #name="ngModel" [(ngModel)]="model.AdminComment" name="AdminComment" placeholder="AdminComment" />
               <input #name="ngModel" [(ngModel)]="model.UserComment" name="UserComment" placeholder="UserComment" />

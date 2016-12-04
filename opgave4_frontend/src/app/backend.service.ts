@@ -145,23 +145,29 @@ export class BackendService {
       });
   }
 
-  // Component category
-  editComponentCategory(category) {
-    return this.put(`${this.baseUrl}`, JSON.stringify(category))
+  searchForComponent(name: string): Promise<Array<ComponentModel>> {
+    const params = {name: name};
+    return this.post(`${this.baseUrl}/components/search`, JSON.stringify(params))
       .then(res => {
         return res.json();
       });
   }
 
-  createComponentCategory(category) {
+  // Component category
+  editComponentCategory(category: ComponentCategoryModel) {
+    return this.put(`${this.baseUrl}/categories/${category.CategoryId}`, JSON.stringify(category))
+      .then(res => {
+      });
+  }
+
+  createComponentCategory(category: ComponentCategoryModel) {
     return this.post(`${this.baseUrl}/categories`, JSON.stringify(category))
       .then(res => {
-        return res.json();
       })
   }
 
   deleteComponentCategory(category: ComponentCategoryModel) {
-    return this.delete(`${this.baseUrl}/categories/${category.Id}`)
+    return this.delete(`${this.baseUrl}/categories/${category.CategoryId}`)
       .then(_ => {
         return true;
       })
@@ -186,4 +192,17 @@ export class BackendService {
       });
   }
 
+  getComponentsByCategory(category: ComponentCategoryModel) {
+    return this.get(`${this.baseUrl}/components/1/categories/${category.CategoryId}`)
+      .then(res => {
+        return res.json();
+      });
+  }
+
+  getComponentsByType(componentType: ComponentTypeModel) {
+    return this.get(`${this.baseUrl}/component_types/${componentType.ComponentTypeId}`)
+      .then(res => {
+        return res.json();
+      });
+  }
 }

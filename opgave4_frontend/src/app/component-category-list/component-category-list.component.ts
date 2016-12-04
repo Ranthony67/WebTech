@@ -11,10 +11,7 @@ export class ComponentCategoryListComponent implements OnInit {
   private categories = [];
 
   public inEditMode = false;
-  public isNew = false;
-  private categoryToBeEdited: ComponentCategoryModel = null;
-
-  public categoryEditName: string = "";
+  public model: ComponentCategoryModel = new ComponentCategoryModel();
 
   constructor(private backendService: BackendService) {
   }
@@ -33,22 +30,19 @@ export class ComponentCategoryListComponent implements OnInit {
 
   editCategory(category) {
     this.inEditMode = true;
-    this.categoryToBeEdited = category;
+    this.model = category;
   }
 
-  updateEditName(event) {
-    this.categoryEditName = event.target.value;
-  }
+  onSubmit(event) {
+    event.preventDefault();
 
-  save() {
     let method = this.backendService.editComponentCategory.bind(this.backendService);
-    if (this.isNew) {
+
+    if (this.model.CategoryId === undefined) {
       method = this.backendService.createComponentCategory.bind(this.backendService);
     }
 
-    this.categoryToBeEdited.Name = this.categoryEditName;
-
-    method(this.categoryToBeEdited)
+    method(this.model)
       .then(res => {
         this.stopEditing();
         this.reload();
@@ -56,8 +50,7 @@ export class ComponentCategoryListComponent implements OnInit {
   }
 
   deleteCategory() {
-    const category = this.categoryToBeEdited;
-    this.backendService.deleteComponentCategory(category).then(_ => {
+    this.backendService.deleteComponentCategory(this.model).then(_ => {
       this.inEditMode = false;
       this.reload();
     });
@@ -65,13 +58,11 @@ export class ComponentCategoryListComponent implements OnInit {
 
   addNew() {
     this.inEditMode = true;
-    this.isNew = true;
-    this.categoryToBeEdited = new ComponentCategoryModel();
+    this.model = new ComponentCategoryModel();
   }
 
   stopEditing() {
-    this.isNew = false;
     this.inEditMode = false;
-    this.categoryToBeEdited = null;
+    this.model = null;
   }
 }

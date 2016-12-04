@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <span *ngFor="let type of componentTypes" (click)="searchFor(type)" style="cursor: pointer;" class="badge alert-info">
+        {{type.Name}}
+      </span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div *ngFor="let component of components" class="panel panel-default col-md-4">
+      <div class="panel-body">
+        {{component.UserComment}}
+      </div>
+    </div>
+  </div>
+</div>
+
