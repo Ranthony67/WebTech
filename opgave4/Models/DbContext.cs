@@ -12,6 +12,7 @@ namespace WebOpgave4.Models
         public DbSet<Component> Components { get; set; }
         public DbSet<ComponentType> ComponentTypes { get; set; }
         public DbSet<ESImage> ESImages { get; set; }
+        public DbSet<CategoryComponentType> CategoryComponentType { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

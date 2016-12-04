@@ -50,7 +50,7 @@ namespace WebOpgave4.Controllers
         [Route("{componentTypeId:long}")]
         public IActionResult GetComponentsOfComponentType(long componentTypeId)
         {
-            var components = _context.Components.Find(c => c.ComponentTypeId == componentTypeId);
+            var components = _context.Components.Where(c => c.ComponentTypeId == componentTypeId).ToList();
 
             if(components == null)
                 return NotFound();
