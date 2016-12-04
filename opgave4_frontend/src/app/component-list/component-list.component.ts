@@ -1,11 +1,12 @@
 import {Component, OnInit, Input} from '@angular/core';
-import ComponentModel from "../models/component";
+import ComponentModel from "../models/component-model";
 
 @Component({
   selector: 'app-component-list',
   templateUrl: './component-list.component.html',
   styleUrls: ['./component-list.component.css']
 })
+
 export class ComponentListComponent implements OnInit {
   @Input() components: Array<ComponentModel> = [];
 
@@ -15,5 +16,4 @@ export class ComponentListComponent implements OnInit {
   ngOnInit() {
     console.log(this.components);
   }
-
 }

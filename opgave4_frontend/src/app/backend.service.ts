@@ -3,7 +3,8 @@ import {Headers, Http, Response} from '@angular/http';
 import * as _ from 'lodash';
 
 import 'rxjs/add/operator/toPromise';
-import ComponentModel from "./models/component";
+import ComponentModel from "./models/component-model";
+import ComponentCategoryModel from "./models/component-category-model";
 
 @Injectable()
 export class BackendService {
@@ -58,6 +59,14 @@ export class BackendService {
 
   public getComponents(): Promise<Array<ComponentModel>> {
     return this.get(this.baseUrl + '/components')
+      .then(res => res.json())
+      .catch( _ => {
+        return [];
+      });
+  }
+
+  public getComponentCategories(): Promise<Array<ComponentCategoryModel>> {
+    return this.get(this.baseUrl + '/categories')
       .then(res => res.json())
       .catch( _ => {
         return [];

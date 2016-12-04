@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="row">
+    <div [class.col-md-12]="!inEditMode" [class.col-md-6]="inEditMode">
+
+      <div [class.col-md-4]="!inEditMode" [class.col-md-6]="inEditMode" class="panel panel-default"
+           *ngFor="let category of categories">
+        <div class="panel-body">
+          {{category.Name}}
+
+          <button class="btn btn-default" (click)="editCategory(category)">
+            <i class="fa fa-pencil"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-6" *ngIf="inEditMode">
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <p>
+            Category name:
+            <input [value]="categoryEditName" (change)="updateEditName($event);" type="name"/>
+          </p>
+
+          <button class="btn btn-default" (click)="save();">
+            <i class="fa fa-floppy-o"></i>
+            Save
+          </button>
+
+          <button class="btn btn-default" (click)="stopEditing();">
+            <i class="fa fa-times"></i>
+            Cancel
+          </button>
+
+          <button class="btn btn-danger" (click)="deleteCategory();">
+            <i class="fa fa-times"></i>
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

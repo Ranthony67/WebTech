@@ -4,11 +4,16 @@ import {LoginComponent} from "./login/login.component";
 import {SignOutComponent} from "./sign-out/sign-out.component";
 import {LoggedInGuard} from "./logged-in.guard";
 import {SignUpComponent} from "./sign-up/sign-up.component";
+import {ComponentCategoryListComponent} from "./component-category-list/component-category-list.component";
 
 var appRoutes: Routes = [
   {
     path: '',
     component: FrontpageComponent
+  },
+  {
+    path: 'component-categories',
+    component: ComponentCategoryListComponent
   },
   {
     path: 'login',
