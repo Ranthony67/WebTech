@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import 'rxjs/add/operator/toPromise';
 import ComponentModel from "./models/component-model";
 import ComponentCategoryModel from "./models/component-category-model";
+import ComponentTypeModel from "./models/component-type-model";
 
 @Injectable()
 export class BackendService {
@@ -41,15 +42,15 @@ export class BackendService {
     return this.http.post(url, params, {headers: this.defaultHeaders()}).toPromise();
   }
 
-  private put(url: string, params: string=""): Promise<Response> {
+  private put(url: string, params: string = ""): Promise<Response> {
     return this.http.put(url, params, {headers: this.defaultHeaders()}).toPromise();
   }
 
-  private patch(url: string, params: string="") : Promise<Response> {
+  private patch(url: string, params: string = ""): Promise<Response> {
     return this.http.patch(url, params, {headers: this.defaultHeaders()}).toPromise();
   }
 
-  private delete(url: string) : Promise<Response> {
+  private delete(url: string): Promise<Response> {
     return this.http.delete(url, {headers: this.defaultHeaders()}).toPromise();
   }
 
@@ -60,7 +61,7 @@ export class BackendService {
   public getComponents(): Promise<Array<ComponentModel>> {
     return this.get(this.baseUrl + '/components')
       .then(res => res.json())
-      .catch( _ => {
+      .catch(_ => {
         return [];
       });
   }
@@ -68,7 +69,7 @@ export class BackendService {
   public getComponentCategories(): Promise<Array<ComponentCategoryModel>> {
     return this.get(this.baseUrl + '/categories')
       .then(res => res.json())
-      .catch( _ => {
+      .catch(_ => {
         return [];
       });
   }
@@ -118,4 +119,71 @@ export class BackendService {
   public isAuthenticated() {
     return this.authToken !== null;
   }
+
+  // Component
+  deleteComponent(component: ComponentModel): Promise<Boolean> {
+    return this.delete(`${this.baseUrl}/components/${component.ComponentId}`)
+      .then(_ => {
+        return true;
+      })
+      .catch(_ => {
+        return false;
+      });
+  }
+
+  createComponent(options: ComponentModel) {
+    return this.post(`${this.baseUrl}/components`, JSON.stringify(options))
+      .then(res => {
+        return res.json();
+      });
+  }
+
+  editComponent(model: ComponentModel) {
+    return this.post(`${this.baseUrl}/components/${model.ComponentId}`, JSON.stringify(model))
+      .then(res => {
+        return res.json();
+      });
+  }
+
+  // Component category
+  editComponentCategory(category) {
+    return this.put(`${this.baseUrl}`, JSON.stringify(category))
+      .then(res => {
+        return res.json();
+      });
+  }
+
+  createComponentCategory(category) {
+    return this.post(`${this.baseUrl}/categories`, JSON.stringify(category))
+      .then(res => {
+        return res.json();
+      })
+  }
+
+  deleteComponentCategory(category: ComponentCategoryModel) {
+    return this.delete(`${this.baseUrl}/categories/${category.Id}`)
+      .then(_ => {
+        return true;
+      })
+      .catch(_ => {
+        return false;
+      });
+  }
+
+  // component type
+  getComponentTypes(): Promise<Array<ComponentTypeModel>> {
+    return this.get(`${this.baseUrl}/component_types`)
+      .then((res) => {
+        return res.json();
+      });
+  }
+
+  createComponentType(model: ComponentTypeModel) {
+    const params = JSON.stringify(model);
+    return this.post(`${this.baseUrl}/component_types`, params)
+      .then(res => {
+        return res.json();
+      });
+  }
+
 }

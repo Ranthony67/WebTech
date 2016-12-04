@@ -1,5 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import ComponentModel from "../models/component-model";
+import {BackendService} from "../backend.service";
 
 @Component({
   selector: 'app-component-detail',
@@ -9,10 +10,19 @@ import ComponentModel from "../models/component-model";
 
 export class ComponentDetailComponent implements OnInit {
   @Input() component: ComponentModel;
+  @Input() onDelete;
+  @Input() onEdit;
 
-  constructor() { }
+  constructor(private backendService: BackendService) { }
 
   ngOnInit() {
   }
 
+  edit() {
+    this.onEdit(this.component);
+  }
+
+  delete() {
+    this.onDelete(this.component);
+  }
 }

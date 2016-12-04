@@ -1,5 +1,12 @@
 <div class="container-fluid">
   <div class="row">
+
+    <div class="col-md-12">
+      <button (click)="addNew();" class="btn btn-default">
+        Create new
+      </button>
+    </div>
+
     <div [class.col-md-12]="!inEditMode" [class.col-md-6]="inEditMode">
 
       <div [class.col-md-4]="!inEditMode" [class.col-md-6]="inEditMode" class="panel panel-default"

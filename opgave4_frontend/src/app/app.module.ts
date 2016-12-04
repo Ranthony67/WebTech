@@ -15,9 +15,9 @@ import {SignOutComponent} from './sign-out/sign-out.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import appRoutes from "./routes";
-import { ComponentListComponent } from './component-list/component-list.component';
 import { ComponentDetailComponent } from './component-detail/component-detail.component';
 import { ComponentCategoryListComponent } from './component-category-list/component-category-list.component';
+import { ComponentTypeListComponent } from './component-type-list/component-type-list.component';
 
 
 @NgModule({
@@ -28,9 +28,9 @@ import { ComponentCategoryListComponent } from './component-category-list/compon
     SignOutComponent,
     SignUpComponent,
     FrontpageComponent,
-    ComponentListComponent,
     ComponentDetailComponent,
     ComponentCategoryListComponent,
+    ComponentTypeListComponent,
   ],
   imports: [
     BrowserModule,

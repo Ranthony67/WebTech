@@ -5,6 +5,7 @@ import {SignOutComponent} from "./sign-out/sign-out.component";
 import {LoggedInGuard} from "./logged-in.guard";
 import {SignUpComponent} from "./sign-up/sign-up.component";
 import {ComponentCategoryListComponent} from "./component-category-list/component-category-list.component";
+import {ComponentTypeListComponent} from "./component-type-list/component-type-list.component";
 
 var appRoutes: Routes = [
   {
@@ -14,6 +15,10 @@ var appRoutes: Routes = [
   {
     path: 'component-categories',
     component: ComponentCategoryListComponent
+  },
+  {
+    path: 'component-types',
+    component: ComponentTypeListComponent
   },
   {
     path: 'login',

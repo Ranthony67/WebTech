@@ -1,7 +1,34 @@
 <div class="container-fluid">
   <div class="row">
+
     <div class="col-md-12">
-      <app-component-list [components]="components"></app-component-list>
+      <button class="btn btn-default" (click)="openNew()">Add komponent</button>
+
+      <div [hidden]="!inEditMode" class="col-md-12" *ngIf="inEditMode">
+        <div class="panel panel-default">
+          <div class="panel-body">
+
+            <form #componentTypeForm="ngForm" (ngSubmit)="onSubmit($event)">
+              <input #name="ngModel" [(ngModel)]="model.ComponentNumber" name="ComponentNumber" placeholder="ComponentNumber" />
+              <input #name="ngModel" [(ngModel)]="model.SerialNo" name="SerialNo" placeholder="SerialNo" />
+              <input #name="ngModel" [(ngModel)]="model.AdminComment" name="AdminComment" placeholder="AdminComment" />
+              <input #name="ngModel" [(ngModel)]="model.UserComment" name="UserComment" placeholder="UserComment" />
+
+              <button type="submit" class="btn btn-default" [disabled]="!componentTypeForm.form.valid">Submit</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
     </div>
+
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4" *ngFor="let component of components">
+          <app-component-detail [onEdit]="onEdit.bind(this)" [onDelete]="delete" [component]="component"></app-component-detail>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-md-12">
+      <button (click)="addNew();" class="btn btn-default">
+        Create new
+      </button>
+    </div>
+
+    <div [class.col-md-12]="!inEditMode" [class.col-md-6]="inEditMode">
+
+      <div [class.col-md-4]="!inEditMode" [class.col-md-6]="inEditMode" class="panel panel-default"
+           *ngFor="let componentType of componentTypes">
+        <div class="panel-body">
+          {{componentType.Name}}
+
+          <button class="btn btn-default" (click)="editCategory(componentType)">
+            <i class="fa fa-pencil"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-6" *ngIf="inEditMode">
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <form #componentTypeForm="ngForm" (ngSubmit)="onSubmit($event)">
+            <input #name="ngModel" [(ngModel)]="model.Name" name="Name" placeholder="Name" />
+            <input #name="ngModel" [(ngModel)]="model.Info" name="Info" placeholder="Info" />
+            <input #name="ngModel" [(ngModel)]="model.Location" name="Location" placeholder="Location" />
+            <input #name="ngModel" [(ngModel)]="model.Datasheet" name="Datasheet" placeholder="Datasheet" />
+            <input #name="ngModel" [(ngModel)]="model.ImageUrl" name="ImageUrl" placeholder="ImageUrl" />
+            <input #name="ngModel" [(ngModel)]="model.Manufacturer" name="Manufacturer" placeholder="Manufacturer" />
+            <input #name="ngModel" [(ngModel)]="model.AdminComment" name="AdminComment" placeholder="AdminComment" />
+
+            <button type="submit" class="btn btn-default" [disabled]="!componentTypeForm.form.valid">Submit</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
