@@ -48,6 +48,10 @@ namespace WebOpgave4.Controllers
         public IActionResult GetComponents()
         {
             var components = _context.Components.ToList();
+
+            if(components == null)
+                return NotFound();
+            
             return Ok(components);
         }
 
@@ -98,6 +102,18 @@ namespace WebOpgave4.Controllers
             _context.SaveChanges();
 
             return NoContent();
+        }
+
+        [HttpGet]
+        [Route("{id:int}/categories/{categoryId:int}")]
+        public IActionResult GetComponentTypesOfCategory(int id, int categoryId)
+        {
+            var componenttypes = _context.CategoryComponentType.Where(cc => cc.CategoryId == categoryId).ToList();
+
+            if (componenttypes == null)
+                return NotFound();
+
+            return Ok(componenttypes);
         }
     }
 }

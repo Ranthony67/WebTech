@@ -26,7 +26,6 @@ namespace WebOpgave4.Models.DTOs
         public string Name { get; set; }
         public string Info { get; set; }
         public string Location { get; set; }
-        [Required]
         public ComponentTypeStatus Status { get; set; }
         public string Datasheet { get; set; }
         public string ImageUrl { get; set; }

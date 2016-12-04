@@ -46,6 +46,31 @@ namespace WebOpgave4.Controllers
             return Ok(dto);
         }
 
+        [HttpGet]
+        [Route("")]
+        public IActionResult GetCategories()
+        {
+            var categories = _context.Categories.ToList();
+
+            if(categories == null)
+                return NotFound();
+
+            return Ok(categories);
+
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public IActionResult GetCategory(int id)
+        {
+            var category = _context.Categories.Find(id);
+
+            if(category == null)
+                return NotFound();
+
+            return Ok(category);
+        }
+
         [HttpPut]
         [Route("{id:int}")]
         public IActionResult UpdateCategory([FromBody] CategoryPostDTO categoryDTO, int id)
@@ -77,18 +102,6 @@ namespace WebOpgave4.Controllers
             _context.SaveChanges();
 
             return NoContent();
-        }
-
-        [HttpGet]
-        [Route("{categoryId:int}")]
-        public IActionResult GetComponentTypesOfCategory(int categoryId)
-        {
-            var componenttypes = _context.CategoryComponentType.Where(cc => cc.CategoryId == categoryId).ToList();
-
-            if(componenttypes == null)
-                return NotFound();
-
-            return Ok(componenttypes);
         }
     }
 }

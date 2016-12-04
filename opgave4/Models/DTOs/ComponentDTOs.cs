@@ -23,7 +23,6 @@ namespace WebOpgave4.Models.DTOs
         public int ComponentNumber { get; set; }
         [Required]
         public string SerialNo { get; set; }
-        [Required]
         public ComponentStatus Status { get; set; }
         [Required]
         public string AdminComment { get; set; }
