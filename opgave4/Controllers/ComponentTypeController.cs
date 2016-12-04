@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using WebOpgave4.Models;
 using WebOpgave4.Models.DTOs;
+using System.Linq;
 
 namespace WebOpgave4.Controllers
 {
@@ -43,6 +44,18 @@ namespace WebOpgave4.Controllers
             var dto = _mapper.Map<ComponentTypeGetDTO>(componentType);
             dto.ComponentTypeId = componentType.ComponentTypeId;
             return Ok(dto);
+        }
+
+        [HttpGet]
+        [Route("{componentTypeId:long}")]
+        public IActionResult GetComponentsOfComponentType(long componentTypeId)
+        {
+            var components = _context.Components.Find(c => c.ComponentTypeId == componentTypeId);
+
+            if(components == null)
+                return NotFound();
+            
+            return Ok(components);
         }
     }
 }
