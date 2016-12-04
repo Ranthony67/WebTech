@@ -20,6 +20,14 @@ namespace WebOpgave4.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        [Route("")]
+        public IActionResult GetComponentCategories()
+        {
+            var componentCategories = _context.Categories.ToList();
+            return Ok(componentCategories);
+        }
+
         [HttpPost]
         [Route("")]
         public IActionResult CreateCategory([FromBody] CategoryPostDTO categoryDTO)

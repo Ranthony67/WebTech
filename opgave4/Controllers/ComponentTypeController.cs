@@ -18,6 +18,14 @@ namespace WebOpgave4.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        [Route("")]
+        public IActionResult GetComponentTypes()
+        {
+            var componentTypes = _context.ComponentTypes.ToList();
+            return Ok(componentTypes);
+        }
+
         [HttpPost]
         [Route("")]
         public IActionResult CreateComponentType([FromBody] ComponentTypePostDTO componentTypeDTO)
@@ -54,7 +62,7 @@ namespace WebOpgave4.Controllers
 
             if(components == null)
                 return NotFound();
-            
+
             return Ok(components);
         }
     }
