@@ -80,8 +80,8 @@ export class BackendService {
     localStorage.removeItem(this.TOKEN_STORAGE_KEY);
   }
 
-  public signUp(email: string, password: string): Promise<Boolean> {
-    const params: Object = {email: email, password: password};
+  public signUp(username: string, password: string): Promise<Boolean> {
+    const params: Object = {username: username, password: password};
 
     return this
       .post(`${this.baseUrl}/users/sign_up`, JSON.stringify(params))
@@ -101,14 +101,16 @@ export class BackendService {
       });
   }
 
-  public signIn(email: string, password: string): Promise<Boolean> {
-    const params: Object = {email: email, password: password};
+  public signIn(username: string, password: string): Promise<Boolean> {
+    const params: Object = {username: username, password: password};
 
     return this
       .post(`${this.baseUrl}/users/sign_in`, JSON.stringify(params))
       .then(res => {
 
         const token = res.json().token;
+
+        this._isAdmin = (res.json().isAdmin === 'true') || false;
         this.saveToken(token);
         this.authToken = token;
 

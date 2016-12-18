@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-md-12">
+      <button *ngIf="isAdmin()"  (click)="addNew();" class="btn btn-default">
+        Create new
+      </button>
+    </div>
+
+    <div [class.col-md-12]="!inEditMode" [class.col-md-6]="inEditMode">
+
+      <div [class.col-md-4]="!inEditMode" [class.col-md-6]="inEditMode" class="panel panel-default"
+           *ngFor="let category of categories">
+        <div class="panel-body">
+          {{category.Name}}
+
+          <button *ngIf="isAdmin()" class="btn btn-default" (click)="editCategory(category)">
+            <i class="fa fa-pencil"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-6" *ngIf="inEditMode">
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <form #categoryForm="ngForm" (ngSubmit)="onSubmit($event)">
+            <input #name="ngModel" [(ngModel)]="model.Name" name="Name" placeholder="Name" />
+
+            <button type="submit" class="btn btn-default" [disabled]="!categoryForm.form.valid">Save</button>
+          </form>
+
+          <button class="btn btn-default" (click)="stopEditing();">
+            <i class="fa fa-times"></i>
+            Cancel
+          </button>
+
+          <button class="btn btn-danger" (click)="deleteCategory();">
+            <i class="fa fa-times"></i>
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
