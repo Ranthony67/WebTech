@@ -23,12 +23,17 @@ namespace WebOpgave4.Controllers
         [Route("sign_in")]
         public IActionResult SignIn([FromBody] SignInDTO SignIn)
         {
-            User user = _context.Users.Where(u => u.UserName == SignIn.Username && u.Password == u.Password).First();
-            
-            if(user == null)
-                return NotFound();
-            
-            return Ok();
+            if(!string.IsNullOrEmpty(Request.Headers["token"]))
+            {
+                User user = _context.Users.Where(u => u.UserName == SignIn.Username && u.Password == u.Password).First();
+                
+                if(user == null)
+                    return NotFound();
+                
+                return Ok();
+            } 
+
+            return BadRequest();
         }
 
         [HttpPost]

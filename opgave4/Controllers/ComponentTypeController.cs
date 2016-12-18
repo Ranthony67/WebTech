@@ -30,8 +30,17 @@ namespace WebOpgave4.Controllers
         [Route("")]
         public IActionResult CreateComponentType([FromBody] ComponentTypePostDTO componentTypeDTO)
         {
-            if(!ModelState.IsValid)
+            string token = Request.Headers["token"];
+            if(string.IsNullOrEmpty(token))
+                return BadRequest("Token is null or empty");
+
+            Guid _token = new Guid(token);
+            
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            if(_context.Users.Where(u => u.Token == _token) == null)
+                return NotFound();
 
             ComponentType componentType = new ComponentType();
             componentType.Name = componentTypeDTO.Name;

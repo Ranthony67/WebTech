@@ -24,9 +24,18 @@ namespace WebOpgave4.Controllers
         [Route("")]
         public IActionResult CreateCategory([FromBody] CategoryPostDTO categoryDTO)
         {
+            string token = Request.Headers["token"];
+            if(string.IsNullOrEmpty(token))
+                return BadRequest("Token is null or empty");
+
+            Guid _token = new Guid(token);
+            
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            if(_context.Users.Where(u => u.Token == _token) == null)
+                return NotFound();
+            
             Category category = new Category();
             category.Name = categoryDTO.Name;
 
@@ -67,9 +76,18 @@ namespace WebOpgave4.Controllers
         [Route("{id:int}")]
         public IActionResult UpdateCategory([FromBody] CategoryPostDTO categoryDTO, int id)
         {
+            string token = Request.Headers["token"];
+            if(string.IsNullOrEmpty(token))
+                return BadRequest("Token is null or empty");
+
+            Guid _token = new Guid(token);
+            
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            if(_context.Users.Where(u => u.Token == _token) == null)
+                return NotFound();
+            
             Category category = new Category();
             category.CategoryId = id;
             category.Name = categoryDTO.Name;
@@ -85,6 +103,15 @@ namespace WebOpgave4.Controllers
         [Route("{id:int}")]
         public IActionResult DeleteCategory(int id)
         {
+            string token = Request.Headers["token"];
+            if(string.IsNullOrEmpty(token))
+                return BadRequest("Token is null or empty");
+
+            Guid _token = new Guid(token);
+
+            if(_context.Users.Where(u => u.Token == _token) == null)
+                return NotFound();
+            
             var category = _context.Categories.Find(id);
 
             if (category == null)

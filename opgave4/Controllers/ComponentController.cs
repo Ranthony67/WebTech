@@ -22,8 +22,18 @@ namespace WebOpgave4.Controllers
         [Route("")]
         public IActionResult CreateComponent([FromBody] ComponentPostDTO componentDTO)
         {
+            string token = Request.Headers["token"];
+            if(string.IsNullOrEmpty(token))
+                return BadRequest("Token is null or empty");
+
+            Guid _token = new Guid(token);
+            
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            if(_context.Users.Where(u => u.Token == _token) == null)
+                return NotFound();
+            
 
             Component component = new Component();
             component.ComponentTypeId = componentDTO.ComponentTypeId;
@@ -70,8 +80,18 @@ namespace WebOpgave4.Controllers
         [Route("{id:int}")]
         public IActionResult UpdateComponent([FromBody] ComponentPostDTO componentDTO, int id)
         {
-            if(!ModelState.IsValid)
+            string token = Request.Headers["token"];
+            if(string.IsNullOrEmpty(token))
+                return BadRequest("Token is null or empty");
+
+            Guid _token = new Guid(token);
+            
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            if(_context.Users.Where(u => u.Token == _token) == null)
+                return NotFound();
+            
 
             Component component = new Component();
             component.ComponentId = id;
@@ -93,6 +113,15 @@ namespace WebOpgave4.Controllers
         [Route("{id:long}")]
         public IActionResult DeleteComponent(long id)
         {
+            string token = Request.Headers["token"];
+            if(string.IsNullOrEmpty(token))
+                return BadRequest("Token is null or empty");
+
+            Guid _token = new Guid(token);
+            
+            if(_context.Users.Where(u => u.Token == _token) == null)
+                return NotFound();
+            
             var component = _context.Components.Find(id);
             
             if(component == null) 
