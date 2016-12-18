@@ -40,6 +40,7 @@ namespace WebOpgave4
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             }));
+
             // mysql://b53fce09ced81c:c00add37@eu-cdbr-west-01.cleardb.com/heroku_eb6883ea620f8fe?reconnect=true
             //var connectionString = "Host=eu-cdbr-west-01.cleardb.com;Database=heroku_eb6883ea620f8fe;User ID=b53fce09ced81c;Password=c00add37";
             services.AddDbContext<Models.DatabaseContext>();

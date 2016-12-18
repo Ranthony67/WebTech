@@ -14,6 +14,8 @@ namespace WebOpgave4.Models
         public DbSet<ESImage> ESImages { get; set; }
         public DbSet<CategoryComponentType> CategoryComponentType { get; set; }
 
+        public DbSet<User> Users {get;set;}
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CategoryComponentType>()
