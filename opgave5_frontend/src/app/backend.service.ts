@@ -89,7 +89,7 @@ export class BackendService {
         console.log(res.json());
 
         const token = res.json().token;
-        this._isAdmin = (res.json().isAdmin === 'true') || false;
+        this._isAdmin = (res.json().admin.toString() === 'true') || false;
 
         this.saveToken(token);
         this.authToken = token;
@@ -110,7 +110,7 @@ export class BackendService {
 
         const token = res.json().token;
 
-        this._isAdmin = (res.json().isAdmin === 'true') || false;
+        this._isAdmin = (res.json().admin.toString() === 'true') || false;
         this.saveToken(token);
         this.authToken = token;
 
